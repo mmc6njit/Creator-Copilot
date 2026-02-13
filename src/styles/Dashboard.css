@@ -1,0 +1,96 @@
+/* src/styles/Dashboard.css */
+.dashboard-container {
+    padding: 20px 30px;
+}
+
+.artist-header {
+    background: var(--background-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-dark);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.artist-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: var(--brand-orange);
+}
+
+.artist-header p {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.kpi-card {
+    background: var(--background-light);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.kpi-card h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.kpi-card p {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: 10px 0 0;
+}
+
+.kpi-card.profit p {
+    color: var(--brand-orange);
+}
+
+.kpi-card.tax p {
+    color: var(--accent-blue);
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.chart-card {
+    background: var(--background-light);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.kpi-card.clickable {
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.kpi-card.clickable:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.kpi-card.clickable span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+}

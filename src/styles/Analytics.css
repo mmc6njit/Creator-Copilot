@@ -1,0 +1,115 @@
+/* src/styles/Analytics.css */
+.analytics-container {
+    padding: 40px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.analytics-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.analytics-header h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.analytics-header h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.insight-card {
+    background-color: var(--background-light);
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    opacity: 0; /* Start invisible for animation */
+}
+
+.insight-card h3 {
+    margin: 0 0 15px;
+    font-size: 1.2rem;
+    color: var(--brand-orange);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.insight-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.insight-card .recommendation-item {
+    margin-bottom: 20px;
+}
+
+.recommendation-item strong {
+    color: var(--text-dark);
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Highlight styles */
+.highlight-orange {
+    color: var(--brand-orange);
+    font-weight: bold;
+}
+
+.highlight-green {
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
+.highlight-spending {
+    color: var(--accent-red, #c95d5d); /* Fallback color */
+    font-weight: bold;
+}
+
+.highlight-warning {
+    color: var(--accent-red, #c95d5d);
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.highlight-secondary {
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+/* NEW: Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* NEW: Animation Classes */
+.animate-fade-in-1 { animation: fadeIn 0.5s 0.1s ease-out forwards; }
+.animate-fade-in-2 { animation: fadeIn 0.5s 0.2s ease-out forwards; }
+.animate-fade-in-3 { animation: fadeIn 0.5s 0.3s ease-out forwards; }
+.animate-fade-in-4 { animation: fadeIn 0.5s 0.4s ease-out forwards; }
+
+/* Responsive Grid */
+@media (max-width: 900px) {
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
