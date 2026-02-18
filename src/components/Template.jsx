@@ -24,7 +24,7 @@ const Template = () => {
             <h1 className="text-2xl font-bold text-shadow-grey hover:text-shadow-grey-hover">
               Shadow Grey
             </h1>
-            <h1 className="text-2xl font-bold text-bright-marine hover:text-bright-marine-hover">
+            <h1 className="text-2xl font-bold text-chocolate hover:text-chocolate-hover">
               Bright Marine
             </h1>
             <h1 className="text-2xl font-bold text-indigo-velvet hover:text-indigo-velvet-hover">
