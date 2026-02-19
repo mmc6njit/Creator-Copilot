@@ -4,7 +4,7 @@ import { supabase } from '../supabaseClient';
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
-    const [session, setSession] = useState("undefined");
+    const [session, setSession] = useState(null);
 
     // Sign up
     const signUpNewUser = async (name, email, password, occupation) => {

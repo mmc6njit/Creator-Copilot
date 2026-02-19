@@ -13,6 +13,8 @@ import { useState } from 'react';
 const Signin = () => {
 
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className="flex items-center justify-center min-h-screen">
