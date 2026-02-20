@@ -8,13 +8,39 @@ import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/compone
 import { Link } from 'react-router-dom';
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from 'react';
+import { UserAuth } from '@/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signin = () => {
-
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const { signInUser } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const { session, error } = await signInUser(email, password);
+
+    if (error) {
+      setError(error);
+
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    } else {
+      navigate('/dashboard');
+    }
+
+    if (session) {
+      closeModal();
+      setError('');
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -26,12 +52,12 @@ const Signin = () => {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
+            <Input id="email" type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <div className="relative">
-              <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" />
+              <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} />
               <Button className="absolute top-0 right-0 px-3 text-primary hover:bg-transparent hover:text-primary" variant="ghost" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <EyeClosed size={20} /> : <Eye size={20} />}
               </Button>
@@ -39,7 +65,7 @@ const Signin = () => {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col justify-between">
-          <Button className="w-full">Sign In</Button>
+          <Button className="w-full" onClick={handleSignIn}>Sign In</Button>
           <p className="mt-4 text-sm">
             Don't have an account?
             <Link to="/signup" className="font-semibold text-chocolate hover:chocolate-hover ml-1">Sign up</Link>
@@ -50,4 +76,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default Signin;

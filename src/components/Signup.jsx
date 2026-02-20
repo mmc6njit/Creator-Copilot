@@ -20,24 +20,26 @@ const Signup = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState('');
 
-  const { session, signUpNewUser, signOutUser } = UserAuth();
+  const { signUpNewUser } = UserAuth();
   const navigate = useNavigate();
-  console.log(session);
 
   const handleSignUp = async (e) => {
     e.preventDefault()
     setLoading(true);
+
     try {
       const result = await signUpNewUser(name, email, password, occupation);
       if (result.success) {
         navigate('/dashboard');
+      } else {
+        setError(result.error.message);
       }
-    } catch (error) {
+    } catch (err) {
       setError("An error occurred");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -59,7 +61,7 @@ const Signup = () => {
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" onChange={(e) => setPassword(e.target.value)} />
+                <Input id="password" type={showPassword ? "text" : "password"}placeholder="••••••••" onChange={(e) => setPassword(e.target.value)} />
                 <Button className="absolute top-0 right-0 px-3 text-primary hover:bg-transparent hover:text-primary" variant="ghost" onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <EyeClosed size={20} /> : <Eye size={20} />}
                 </Button>
@@ -79,7 +81,7 @@ const Signup = () => {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col justify-between">
-            <Button className="w-full" type="submit" disabled={loading}>Sign Up</Button>
+            <Button className="w-full" type="submit" onClick={handleSignUp}>Sign Up</Button>
             <p className="mt-4 text-sm">
               Already have an account?
               <Link to="/signin" className="font-semibold text-chocolate hover:chocolate-hover ml-1">Sign in</Link>
@@ -90,5 +92,5 @@ const Signup = () => {
     </div>
   )
 }
-
+s
 export default Signup
