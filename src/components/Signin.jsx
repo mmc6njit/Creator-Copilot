@@ -1,46 +1,23 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select } from "@/components/ui/select";
-import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from 'react-router-dom';
 import { Eye, EyeClosed } from "lucide-react";
-import { useState } from 'react';
-import { UserAuth } from '@/context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-
+import { useSignin } from '@/hooks/useSignin';
 
 const Signin = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const { signInUser } = UserAuth();
-  const navigate = useNavigate();
-
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    const { session, error } = await signInUser(email, password);
-
-    if (error) {
-      setError(error);
-
-      setTimeout(() => {
-        setError('');
-      }, 3000);
-    } else {
-      navigate('/dashboard');
-    }
-
-    if (session) {
-      closeModal();
-      setError('');
-    }
-  };
+  const {
+    email,
+    password,
+    error,
+    showPassword,
+    setShowPassword,
+    handleEmailChange,
+    handlePasswordChange,
+    handleSignIn
+  } = useSignin();
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -52,20 +29,23 @@ const Signin = () => {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input id="email" type="email" placeholder="Enter your email" value={email} onChange={handleEmailChange} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <div className="relative">
-              <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} />
-              <Button className="absolute top-0 right-0 px-3 text-primary hover:bg-transparent hover:text-primary" variant="ghost" onClick={() => setShowPassword(!showPassword)}>
+              <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={password} onChange={handlePasswordChange} />
+              <Button type="button" className="absolute top-0 right-0 px-3 text-primary hover:bg-transparent hover:text-primary" variant="ghost" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? <EyeClosed size={20} /> : <Eye size={20} />}
               </Button>
             </div>
+            {error && (
+              <p className="text-sm text-red-600">{error}</p>
+            )}
           </div>
         </CardContent>
         <CardFooter className="flex flex-col justify-between">
-          <Button className="w-full" onClick={handleSignIn}>Sign In</Button>
+          <Button className="w-full" type="submit" onClick={handleSignIn}>Sign In</Button>
           <p className="mt-4 text-sm">
             Don't have an account?
             <Link to="/signup" className="font-semibold text-chocolate hover:chocolate-hover ml-1">Sign up</Link>

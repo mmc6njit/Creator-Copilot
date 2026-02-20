@@ -61,11 +61,7 @@ export const AuthContextProvider = ({ children }) => {
             console.error("Error signing out:", error);
         }
     };
-
-
-
-
-    
+ 
     return (
         <AuthContext.Provider value={{session, signUpNewUser, signInUser, signOutUser}}>
             {children}
