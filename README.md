@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Creator Copilot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Creator Copilot is a React + Vite app with Supabase authentication and project management.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+- `frontend/` — React application (routes, UI, auth, features)
+- `backend/` — backend assets (Supabase SQL schema/policies)
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js 18+
+- npm 9+
+- Supabase project (for auth + database)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 1) Frontend Setup
 
-### `npm test`
+From repo root:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+cd frontend
+npm install
+```
 
-### `npm run build`
+Create `frontend/.env`:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```env
+VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=YOUR_SUPABASE_ANON_KEY
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You can also use `VITE_SUPABASE_ANON_KEY` instead of `VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 2) Backend (Supabase) Setup
 
-### `npm run eject`
+Open your Supabase SQL Editor and run:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `backend/supabase/projects.sql`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This creates the `projects` table with indexes and RLS policies.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 3) Run the App
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+cd frontend
+npm run dev
+```
 
-## Learn More
+Vite will print the local URL (usually `http://localhost:5173`).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Useful Commands
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+cd frontend
+npm run lint
+npm run build
+npm run preview
+```
 
-### Code Splitting
+## Troubleshooting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- If auth/project calls fail, verify Supabase env values in `frontend/.env`.
+- If a port is already in use, Vite automatically chooses another port.
+- If dependencies are missing, run `cd frontend && npm install` again.
