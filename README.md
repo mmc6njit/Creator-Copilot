@@ -1,16 +1,64 @@
-# React + Vite
+# Creator Copilot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Creator Copilot is a React + Vite app with Supabase authentication and project management.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `frontend/` — React application (routes, UI, auth, features)
+- `backend/` — backend assets (Supabase SQL schema/policies)
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- Node.js 18+
+- npm 9+
+- Supabase project (for auth + database)
 
-## Expanding the ESLint configuration
+## 1) Frontend Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+From repo root:
+
+```bash
+cd frontend
+npm install
+```
+
+Create `frontend/.env`:
+
+```env
+VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=YOUR_SUPABASE_ANON_KEY
+```
+
+You can also use `VITE_SUPABASE_ANON_KEY` instead of `VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY`.
+
+## 2) Backend (Supabase) Setup
+
+Open your Supabase SQL Editor and run:
+
+- `backend/supabase/projects.sql`
+
+This creates the `projects` table with indexes and RLS policies.
+
+## 3) Run the App
+
+```bash
+cd frontend
+npm run dev
+```
+
+Vite will print the local URL (usually `http://localhost:5173`).
+
+## Useful Commands
+
+```bash
+cd frontend
+npm run lint
+npm run build
+npm run preview
+```
+
+## Troubleshooting
+
+- If auth/project calls fail, verify Supabase env values in `frontend/.env`.
+- If a port is already in use, Vite automatically chooses another port.
+- If dependencies are missing, run `cd frontend && npm install` again.
