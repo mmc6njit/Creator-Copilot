@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { UserAuth } from "@/context/AuthContext";
-import { getProjectById } from "@/services/projects";
+import { UserAuth } from "@/features/auth/context/AuthContext";
+import { getProjectById } from "@/features/projects/services/projects";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";

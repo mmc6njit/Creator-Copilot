@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Link } from 'react-router-dom';
 import { Eye, EyeClosed, CheckCircle2, X } from "lucide-react";
-import { useSignup } from '@/hooks/useSignup';
+import { useSignup } from '@/features/auth/hooks/useSignup';
 
 const Signup = () => {
   const {

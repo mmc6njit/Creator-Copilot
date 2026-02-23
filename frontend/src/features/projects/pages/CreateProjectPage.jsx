@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { CalendarIcon } from "lucide-react";
 
-import { UserAuth } from "@/context/AuthContext";
+import { UserAuth } from "@/features/auth/context/AuthContext";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -33,7 +33,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { createProject } from "@/services/projects";
+import { createProject } from "@/features/projects/services/projects";
 
 const DESCRIPTION_LIMIT = 160;
 

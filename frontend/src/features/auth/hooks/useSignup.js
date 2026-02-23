@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAuth } from '@/context/AuthContext';
+import { UserAuth } from '@/features/auth/context/AuthContext';
 import { validateName, validateEmail, validatePassword, validateOccupation, getPasswordValidations } from '@/utils/validations';
 
 export const useSignup = () => {
@@ -101,7 +101,7 @@ export const useSignup = () => {
       } else {
         setError(result.error.message);
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred");
     } finally {
       setLoading(false);

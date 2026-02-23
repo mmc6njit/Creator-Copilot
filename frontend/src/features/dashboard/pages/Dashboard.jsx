@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import  { UserAuth } from '@/context/AuthContext';
-import { getProjects } from '@/services/projects';
 import { toast } from 'sonner';
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from '@/components/site-header';
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { UserAuth } from '@/features/auth/context/AuthContext';
+import { getProjects } from '@/features/projects/services/projects';
 
 const Dashboard = () => {
   const { session } = UserAuth();

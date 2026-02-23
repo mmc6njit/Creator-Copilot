@@ -1,6 +1,6 @@
 import React from "react";
 
-import { UserAuth } from "@/context/AuthContext";
+import { UserAuth } from "@/features/auth/context/AuthContext";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";

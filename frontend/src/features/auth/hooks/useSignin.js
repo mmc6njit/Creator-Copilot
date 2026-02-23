@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAuth } from '@/context/AuthContext';
+import { UserAuth } from '@/features/auth/context/AuthContext';
 
 export const useSignin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const { signInUser } = UserAuth();

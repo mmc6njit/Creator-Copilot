@@ -26,10 +26,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-
+import { UserAuth } from '@/features/auth/context/AuthContext';
 import { useNavigate } from "react-router-dom";
-
-import  { UserAuth } from '@/context/AuthContext';
 
 export function NavUser({
   user

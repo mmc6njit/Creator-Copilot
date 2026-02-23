@@ -21,7 +21,7 @@ import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
-import { UserAuth } from "@/context/AuthContext"
+import { UserAuth } from "@/features/auth/context/AuthContext"
 import tapyocaLogo from "@/assets/tapyoca-logo.svg"
 import {
   Sidebar,
