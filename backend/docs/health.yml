@@ -1,0 +1,14 @@
+tags:
+  - Health
+summary: Public health check
+description: Returns server status. No authentication required.
+responses:
+  200:
+    description: Server is running
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+

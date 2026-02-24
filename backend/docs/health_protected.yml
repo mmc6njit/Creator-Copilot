@@ -1,0 +1,32 @@
+tags:
+  - Health
+summary: Protected health check
+description: >
+  Returns server status along with the authenticated user's ID and email.
+  Requires a valid Supabase access token in the Authorization header.
+security:
+  - BearerAuth: []
+responses:
+  200:
+    description: Authenticated successfully
+    schema:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        user_id:
+          type: string
+          example: 8d26cca6-a9a8-4866-9798-3458c1dec014
+        email:
+          type: string
+          example: user@example.com
+  401:
+    description: Missing, invalid, or expired token
+    schema:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Missing or malformed Authorization header
+
