@@ -7,8 +7,11 @@ frontend/node_modules/
 .env.*
 frontend/.env
 frontend/.env.*
+backend/.env
+backend/.env.*
 !.env.example
 !frontend/.env.example
+!backend/.env.example
 
 # Build output
 dist/
@@ -41,3 +44,13 @@ Thumbs.db
 
 # Backend local runtime artifacts
 backend/supabase/.temp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+*.egg
