@@ -14,22 +14,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
@@ -37,17 +23,42 @@ import { createProject } from "@/features/projects/services/projects";
 
 const DESCRIPTION_LIMIT = 160;
 
-const formatDateForInput = (value) => {
+const pad2 = (value) => String(value).padStart(2, "0");
+
+const formatLocalYmd = (value) => {
   if (!value) {
     return "";
   }
 
-  const date = new Date(value);
+  const date = value instanceof Date ? value : new Date(value);
   if (Number.isNaN(date.getTime())) {
     return "";
   }
 
-  return date.toISOString().split("T")[0];
+  return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+};
+
+const parseLocalYmd = (value) => {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const parts = value.split("-").map((part) => Number(part));
+  if (parts.length !== 3) {
+    return null;
+  }
+
+  const [year, month, day] = parts;
+  if (!year || !month || !day) {
+    return null;
+  }
+
+  const date = new Date(year, month - 1, day);
+  if (Number.isNaN(date.getTime())) {
+    return null;
+  }
+
+  return date;
 };
 
 const formatDateLabel = (value) => {
@@ -55,7 +66,7 @@ const formatDateLabel = (value) => {
     return "Pick a date";
   }
 
-  const date = new Date(value);
+  const date = value instanceof Date ? value : parseLocalYmd(value) || new Date(value);
   if (Number.isNaN(date.getTime())) {
     return "Pick a date";
   }
@@ -331,13 +342,13 @@ const CreateProjectPage = () => {
                             <PopoverContent className="w-auto p-0" align="start" side="top" avoidCollisions={false}>
                               <Calendar
                                 mode="single"
-                                selected={field.value ? new Date(field.value) : undefined}
-                                defaultMonth={field.value ? new Date(field.value) : new Date()}
+                                selected={field.value ? parseLocalYmd(field.value) ?? undefined : undefined}
+                                defaultMonth={field.value ? parseLocalYmd(field.value) ?? new Date() : new Date()}
                                 fromYear={minCalendarYear}
                                 toYear={maxCalendarYear}
                                 initialFocus
                                 onSelect={(date) => {
-                                  const nextStartDate = formatDateForInput(date);
+                                  const nextStartDate = formatLocalYmd(date);
                                   field.onChange(nextStartDate);
 
                                   const currentEndDate = form.getValues("endDate");
@@ -378,26 +389,26 @@ const CreateProjectPage = () => {
                             <PopoverContent className="w-auto p-0" align="start" side="top" avoidCollisions={false}>
                               <Calendar
                                 mode="single"
-                                selected={endDateValue ? new Date(endDateValue) : undefined}
+                                selected={endDateValue ? parseLocalYmd(endDateValue) ?? undefined : undefined}
                                 defaultMonth={
                                   endDateValue
-                                    ? new Date(endDateValue)
+                                    ? parseLocalYmd(endDateValue) ?? new Date(endDateValue)
                                     : startDateValue
-                                      ? new Date(startDateValue)
+                                      ? parseLocalYmd(startDateValue) ?? new Date(startDateValue)
                                       : new Date()
                                 }
                                 fromYear={minCalendarYear}
                                 toYear={maxCalendarYear}
                                 initialFocus
                                 onSelect={(date) => {
-                                  field.onChange(formatDateForInput(date));
+                                  field.onChange(formatLocalYmd(date));
                                 }}
                                 disabled={(date) => {
                                   if (!startDateValue) {
                                     return false;
                                   }
 
-                                  const minDate = new Date(`${startDateValue}T00:00:00`);
+                                  const minDate = parseLocalYmd(startDateValue) ?? new Date(`${startDateValue}T00:00:00`);
                                   return date < minDate;
                                 }}
                                 captionLayout="dropdown"
