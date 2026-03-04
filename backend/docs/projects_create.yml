@@ -1,0 +1,52 @@
+tags:
+  - Projects
+summary: Create a new project
+description: Create a new creative project with a budget ceiling.
+security:
+  - BearerAuth: []
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - name
+        - description
+        - budgetCeiling
+        - currency
+        - projectType
+        - startDate
+        - endDate
+      properties:
+        name:
+          type: string
+          example: My Album
+        description:
+          type: string
+          example: Debut album production
+        budgetCeiling:
+          type: number
+          example: 10000.00
+        currency:
+          type: string
+          example: USD
+        projectType:
+          type: string
+          enum: [Music, Film]
+          example: Music
+        startDate:
+          type: string
+          format: date
+          example: "2026-03-01"
+        endDate:
+          type: string
+          format: date
+          example: "2026-06-01"
+responses:
+  201:
+    description: Project created
+  400:
+    description: Validation error
+  401:
+    description: Missing or invalid token

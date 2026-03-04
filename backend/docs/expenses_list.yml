@@ -1,0 +1,34 @@
+tags:
+  - Expenses
+summary: List expenses for a project
+description: >
+  Returns all expenses for the given project, ordered by date descending.
+  Optionally filter by department.
+security:
+  - BearerAuth: []
+parameters:
+  - name: project_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the project
+  - name: department
+    in: query
+    type: string
+    required: false
+    description: Filter by department name (e.g. "Studio / Venue")
+responses:
+  200:
+    description: List of expenses
+    schema:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/definitions/Expense"
+        count:
+          type: integer
+          example: 5
+  401:
+    description: Missing or invalid token

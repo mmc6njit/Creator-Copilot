@@ -1,0 +1,30 @@
+tags:
+  - Expenses
+summary: Get a single expense
+description: >
+  Returns a single expense by ID. Must belong to the authenticated user.
+security:
+  - BearerAuth: []
+parameters:
+  - name: project_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the project
+  - name: expense_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the expense
+responses:
+  200:
+    description: Expense details
+    schema:
+      type: object
+      properties:
+        data:
+          $ref: "#/definitions/Expense"
+  404:
+    description: Expense not found
+  401:
+    description: Missing or invalid token

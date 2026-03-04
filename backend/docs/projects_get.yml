@@ -1,0 +1,19 @@
+tags:
+  - Projects
+summary: Get a single project
+description: Returns a project by ID. Must belong to the authenticated user.
+security:
+  - BearerAuth: []
+parameters:
+  - name: project_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the project
+responses:
+  200:
+    description: Project details
+  404:
+    description: Project not found
+  401:
+    description: Missing or invalid token

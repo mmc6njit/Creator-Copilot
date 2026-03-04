@@ -1,0 +1,56 @@
+tags:
+  - Expenses
+summary: Update an expense
+description: >
+  Update one or more fields of an existing expense.
+  Only the fields provided in the request body will be updated.
+security:
+  - BearerAuth: []
+parameters:
+  - name: project_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the project
+  - name: expense_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the expense
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+        amount:
+          type: number
+        department:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        expenseDate:
+          type: string
+          format: date
+        vendor:
+          type: string
+        receiptUrl:
+          type: string
+responses:
+  200:
+    description: Expense updated successfully
+    schema:
+      type: object
+      properties:
+        data:
+          $ref: "#/definitions/Expense"
+  400:
+    description: Validation error
+  404:
+    description: Expense not found
+  401:
+    description: Missing or invalid token

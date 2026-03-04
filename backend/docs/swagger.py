@@ -21,6 +21,34 @@ SWAGGER_TEMPLATE = {
             "description": "Supabase access token. Format: **Bearer &lt;access_token&gt;**",
         }
     },
+    "definitions": {
+        "Expense": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "example": "a1b2c3d4-..."},
+                "userId": {"type": "string"},
+                "projectId": {"type": "string"},
+                "name": {"type": "string", "example": "Studio session"},
+                "amount": {"type": "number", "example": 250.00},
+                "department": {"type": "string", "example": "Studio / Venue"},
+                "category": {"type": "string", "example": "Recording"},
+                "description": {"type": "string"},
+                "expenseDate": {"type": "string", "format": "date"},
+                "vendor": {"type": "string"},
+                "receiptUrl": {"type": "string"},
+                "createdAt": {"type": "string", "format": "date-time"},
+                "updatedAt": {"type": "string", "format": "date-time"},
+                "project": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "string"},
+                        "name": {"type": "string"},
+                        "currency": {"type": "string"},
+                    },
+                },
+            },
+        },
+    },
 }
 
 SWAGGER_CONFIG = {

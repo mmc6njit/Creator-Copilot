@@ -1,0 +1,20 @@
+tags:
+  - Projects
+summary: List all projects
+description: Returns all projects for the authenticated user, ordered by creation date.
+security:
+  - BearerAuth: []
+responses:
+  200:
+    description: List of projects
+    schema:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+        count:
+          type: integer
+  401:
+    description: Missing or invalid token
