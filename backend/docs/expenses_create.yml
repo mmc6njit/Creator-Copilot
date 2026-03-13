@@ -1,0 +1,61 @@
+tags:
+  - Expenses
+summary: Create an expense
+description: >
+  Add a new expense to a project. Requires authentication.
+security:
+  - BearerAuth: []
+parameters:
+  - name: project_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the project
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - name
+        - amount
+        - department
+        - expenseDate
+      properties:
+        name:
+          type: string
+          example: Studio session
+        amount:
+          type: number
+          example: 250.00
+        department:
+          type: string
+          example: Studio / Venue
+        category:
+          type: string
+          example: Recording
+        description:
+          type: string
+          example: 4-hour session at Abbey Road
+        expenseDate:
+          type: string
+          format: date
+          example: "2026-02-25"
+        vendor:
+          type: string
+          example: Abbey Road Studios
+        receiptUrl:
+          type: string
+          example: https://example.com/receipt.pdf
+responses:
+  201:
+    description: Expense created successfully
+    schema:
+      type: object
+      properties:
+        data:
+          $ref: "#/definitions/Expense"
+  400:
+    description: Validation error or missing fields
+  401:
+    description: Missing or invalid token

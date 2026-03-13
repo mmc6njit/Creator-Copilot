@@ -25,21 +25,57 @@ npm install
 Create `frontend/.env`:
 
 ```env
-VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
-VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=YOUR_SUPABASE_ANON_KEY
+VITE_SUPABASE_URL=
+VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY=
 ```
 
 You can also use `VITE_SUPABASE_ANON_KEY` instead of `VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY`.
 
 ## 2) Backend (Supabase) Setup
 
+Create `backend/.env`:
+
+```env
+# Supabase
+SUPABASE_URL=
+SUPABASE_SECRET_KEY=
+
+#Flask
+PORT=5000
+
+#CORS
+FRONTEND_URL=https://creator-copilot-frontend.up.railway.app/
+```
+
 Open your Supabase SQL Editor and run:
 
 - `backend/supabase/projects.sql`
+- `backend/supabase/expenses.sql`
 
 This creates the `projects` table with indexes and RLS policies.
 
 ## 3) Run the App
+
+### Backend (API)
+
+The dashboard uses a local Flask API for projects/expenses. Run the backend first.
+
+Start the backend:
+
+```bash
+cd backend/
+
+# If `python` isn't available on your Linux system, use `python3` instead.
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# Run locally on port 5001
+PORT=5001 python app.py
+```
+
+Note: when running locally, you may want `FRONTEND_URL=http://localhost:5173` in `backend/.env`.
+
+### Frontend (Vite)
 
 ```bash
 cd frontend

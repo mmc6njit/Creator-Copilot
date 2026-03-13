@@ -1,0 +1,39 @@
+tags:
+  - Budget
+summary: Get budget summary for a project
+description: >
+  Returns the project's budget ceiling, total amount spent across all expenses,
+  remaining budget, and whether the project is over budget.
+security:
+  - BearerAuth: []
+parameters:
+  - name: project_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the project
+responses:
+  200:
+    description: Budget summary
+    schema:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            budgetCeiling:
+              type: number
+              example: 10000.00
+            totalSpent:
+              type: number
+              example: 3450.75
+            remaining:
+              type: number
+              example: 6549.25
+            overBudget:
+              type: boolean
+              example: false
+  404:
+    description: Project not found
+  401:
+    description: Missing or invalid token

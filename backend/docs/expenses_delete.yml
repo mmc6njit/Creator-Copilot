@@ -1,0 +1,31 @@
+tags:
+  - Expenses
+summary: Delete an expense
+description: >
+  Permanently delete an expense. Must belong to the authenticated user.
+security:
+  - BearerAuth: []
+parameters:
+  - name: project_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the project
+  - name: expense_id
+    in: path
+    type: string
+    required: true
+    description: UUID of the expense
+responses:
+  200:
+    description: Expense deleted
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Expense deleted
+  404:
+    description: Expense not found
+  401:
+    description: Missing or invalid token

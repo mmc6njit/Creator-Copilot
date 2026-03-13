@@ -3,6 +3,8 @@ from flask import Flask
 from flask_cors import CORS
 from docs.swagger import init_swagger
 from routes.health import health_bp
+from routes.expenses import expenses_bp
+from routes.projects import projects_bp
 
 # Local dev origins always allowed; production origin loaded from env var.
 _DEFAULT_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]
@@ -23,6 +25,8 @@ def create_app():
 
     # --- Register route blueprints ---
     app.register_blueprint(health_bp)
+    app.register_blueprint(expenses_bp)
+    app.register_blueprint(projects_bp)
 
     return app
 
